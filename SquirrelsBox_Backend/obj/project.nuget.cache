@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "fxQ/AIH8UVnNIg3O3119cNXsK7r1F7b9vISn9Gh8PCpLcty/kCnnekjnzBtT0mU19uCR/CThIKbkH/lrlI86WQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Diego\\source\\repos\\SquirrelsBox_Backend\\SquirrelsBox_Backend\\SquirrelsBox_Backend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Diego\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.18\\microsoft.netcore.app.host.win-x64.3.1.18.nupkg.sha512"
+  ],
+  "logs": []
+}
