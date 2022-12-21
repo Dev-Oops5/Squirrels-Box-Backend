@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\MiBand.API.props" />
+</Project>
