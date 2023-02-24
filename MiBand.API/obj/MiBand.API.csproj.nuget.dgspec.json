@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Diego\\source\\repos\\MiBand.API\\MiBand.API\\MiBand.API.csproj": {}
+    "D:\\GitHub_Projects\\Squirrels-Box-Backend\\MiBand.API\\MiBand.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Diego\\source\\repos\\MiBand.API\\MiBand.API\\MiBand.API.csproj": {
+    "D:\\GitHub_Projects\\Squirrels-Box-Backend\\MiBand.API\\MiBand.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Diego\\source\\repos\\MiBand.API\\MiBand.API\\MiBand.API.csproj",
+        "projectUniqueName": "D:\\GitHub_Projects\\Squirrels-Box-Backend\\MiBand.API\\MiBand.API.csproj",
         "projectName": "MiBand.API",
-        "projectPath": "C:\\Users\\Diego\\source\\repos\\MiBand.API\\MiBand.API\\MiBand.API.csproj",
+        "projectPath": "D:\\GitHub_Projects\\Squirrels-Box-Backend\\MiBand.API\\MiBand.API.csproj",
         "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Diego\\source\\repos\\MiBand.API\\MiBand.API\\obj\\",
+        "outputPath": "D:\\GitHub_Projects\\Squirrels-Box-Backend\\MiBand.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -90,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
         }
       }
     }

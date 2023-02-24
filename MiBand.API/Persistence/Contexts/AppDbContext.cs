@@ -11,6 +11,12 @@ namespace MiBand.API.Persistence.Contexts
         }
 
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Session> Sesions { get; set; }
+        public DbSet<Box> Boxes { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Spec> Specs { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

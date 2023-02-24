@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ubS3qOOBHobiltRGqQjNfEZ8VWCj3i2Yr+y0IcHCYcrApkpOtbTjYeUHSm87w4QeoS2v9VgiNT9ov++wYs5lgQ==",
+  "dgSpecHash": "8GCiDsPdF8u4CdFpZd86t6PmstPF3pVmRCUXCMlNYOgJmbJblvKA6r0o+VDhXk/4xZxUQpSHFxELOA1+6P8vSg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Diego\\source\\repos\\MiBand.API\\MiBand.API\\MiBand.API.csproj",
+  "projectFilePath": "D:\\GitHub_Projects\\Squirrels-Box-Backend\\MiBand.API\\MiBand.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Diego\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Diego\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
