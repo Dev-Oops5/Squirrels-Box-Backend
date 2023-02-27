@@ -21,9 +21,9 @@ namespace MiBand.API.Persistence.Repositories
             _context.Users.Remove(model);
         }
 
-        public async Task<User> FindByStringAsync(string value)
+        public async Task<User> FindByIdAsync(int id)
         {
-            return await _context.Users.FirstOrDefaultAsync(i => i.Id.ToString() == value);
+            return await _context.Users.FindAsync(id);
         }
 
         public void Update(User model)

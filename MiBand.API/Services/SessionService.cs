@@ -7,20 +7,22 @@ using MiBand.API.Persistence.Repositories;
 
 namespace MiBand.API.Services
 {
-    public class SessionService : IBaseService<Session, SessionResponse>
+    public class SessionService : IBaseService<Session, SessionResponse>, ISessionService
     {
         private readonly IBaseRespository<Session> _repository;
+        private readonly ISessionRepository _sessionRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public SessionService(IBaseRespository<Session> repository, IUnitOfWork unitOfWork)
+        public SessionService(IBaseRespository<Session> repository, ISessionRepository sessionRepository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _sessionRepository = sessionRepository;
             _unitOfWork = unitOfWork;
         }
 
         public async Task<SessionResponse> DeleteAsync(int id)
         {
-            var result = await _repository.FindByStringAsync(id.ToString());
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new SessionResponse("User Session not found");
 
@@ -37,11 +39,26 @@ namespace MiBand.API.Services
             }
         }
 
-        public async Task<SessionResponse> FindByStringAsync(string value)
+        public async Task<SessionResponse> FindByIdAsync(int id)
         {
             try
             {
-                var result = await _repository.FindByStringAsync(value);
+                var result = await _repository.FindByIdAsync(id);
+                await _unitOfWork.CompleteAsync();
+
+                return new SessionResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new SessionResponse($"User Session not found: {e.Message}");
+            }
+        }
+
+        public async Task<SessionResponse> FindByUsernameOrEmailAndPasswordAsync(string username, string email, string password)
+        {
+            try
+            {
+                var result = await _sessionRepository.FindByUsernameOrEmailAndPasswordAsync(username, email, password);
                 await _unitOfWork.CompleteAsync();
 
                 return new SessionResponse(result);
@@ -54,12 +71,13 @@ namespace MiBand.API.Services
 
         public async Task<SessionResponse> SaveAsync(Session model)
         {
-            var existingVal = await _repository.FindByStringAsync(model.Id.ToString());
+            var existingVal = await _repository.FindByIdAsync(model.Id);
             if (existingVal != null)
                 return new SessionResponse("There is already a User Session with this Id");
 
             try
             {
+                model.CreatedDate = DateTime.Now.ToString();
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
 
@@ -73,13 +91,16 @@ namespace MiBand.API.Services
 
         public async Task<SessionResponse> UpdateAsync(int id, Session model)
         {
-            var result = await _repository.FindByStringAsync(id.ToString());
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new SessionResponse("User Session not found");
 
             result.Username = model.Username;
             result.Email = model.Email;
             result.Password = model.Password;
+
+            result.Active = model.Active;
+            result.UpdatedDate = DateTime.Now.ToString();
 
             try
             {

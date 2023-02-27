@@ -21,9 +21,9 @@ namespace MiBand.API.Persistence.Repositories
             _context.Sections.Remove(model);
         }
 
-        public async Task<Section> FindByStringAsync(string value)
+        public async Task<Section> FindByIdAsync(int id)
         {
-            return await _context.Sections.FirstOrDefaultAsync(i => i.Id.ToString() == value);
+            return await _context.Sections.FindAsync(id);
         }
 
         public async Task<IEnumerable<Section>> ListByIdAsync(int id)

@@ -20,7 +20,7 @@ namespace MiBand.API.Services
 
         public async Task<UserResponse> DeleteAsync(int id)
         {
-            var result = await _repository.FindByStringAsync(id.ToString());
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new UserResponse("User not found");
 
@@ -37,11 +37,11 @@ namespace MiBand.API.Services
             }
         }
 
-        public async Task<UserResponse> FindByStringAsync(string value)
+        public async Task<UserResponse> FindByIdAsync(int id)
         {
             try
             {
-                var result = await _repository.FindByStringAsync(value);
+                var result = await _repository.FindByIdAsync(id);
                 await _unitOfWork.CompleteAsync();
 
                 return new UserResponse(result);
@@ -54,12 +54,13 @@ namespace MiBand.API.Services
 
         public async Task<UserResponse> SaveAsync(User model)
         {
-            var existingVal = await _repository.FindByStringAsync(model.Id.ToString());
+            var existingVal = await _repository.FindByIdAsync(model.Id);
             if (existingVal != null)
                 return new UserResponse("There is already a user with this Id");
 
             try
             {
+                model.CreatedDate = DateTime.Now.ToString();
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
 
@@ -73,13 +74,19 @@ namespace MiBand.API.Services
 
         public async Task<UserResponse> UpdateAsync(int id, User model)
         {
-            var result = await _repository.FindByStringAsync(id.ToString());
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new UserResponse("User not found");
 
+            result.Name = model.Name;
+            result.Lastname = model.Lastname;
+            result.UserPhoto = model.UserPhoto;
             result.Birthday = model.Birthday;
             result.Boxes = model.Boxes;
             result.BoxCounter = model.BoxCounter;
+
+            result.Active = model.Active;
+            result.UpdatedDate = DateTime.Now.ToString();
 
             try
             {

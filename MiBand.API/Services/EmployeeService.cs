@@ -37,10 +37,10 @@ namespace MiBand.API.Services
             }
         }
 
-        public async Task<IEnumerable<Employee>> GetAllAsync()
-        {
-            return await _employeeRepository.ListAsync();
-        }
+        //public async Task<IEnumerable<Employee>> GetAllAsync()
+        //{
+        //    return await _employeeRepository.ListAsync();
+        //}
 
         public async Task<EmployeeResponse> GetByIdAsync(int employeeId)
         {

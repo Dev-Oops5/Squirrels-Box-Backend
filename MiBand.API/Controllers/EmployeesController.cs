@@ -25,13 +25,13 @@ namespace MiBand.API.Controllers
         /*****************************************************************/
                             /*GET ALL EMPLOYEES*/
         /*****************************************************************/
-        [HttpGet]
-        public async Task<IEnumerable<EmployeeResource>> GetAllAsync()
-        {
-            var cuestionary = await _employeeService.GetAllAsync();
-            var resources = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeResource>>(cuestionary);
-            return resources;
-        }
+        //[HttpGet]
+        //public async Task<IEnumerable<EmployeeResource>> GetAllAsync()
+        //{
+        //    var cuestionary = await _employeeService.GetAllAsync();
+        //    var resources = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeResource>>(cuestionary);
+        //    return resources;
+        //}
 
         /******************************************/
                     /*GET EMPLOYEE BY ID ASYNC*/

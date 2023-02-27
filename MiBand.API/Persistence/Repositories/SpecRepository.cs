@@ -21,9 +21,9 @@ namespace MiBand.API.Persistence.Repositories
             _context.Specs.Remove(model);
         }
 
-        public async Task<Spec> FindByStringAsync(string value)
+        public async Task<Spec> FindByIdAsync(int id)
         {
-            return await _context.Specs.FirstOrDefaultAsync(i => i.Id.ToString() == value);
+            return await _context.Specs.FindAsync(id);
         }
 
         public async Task<IEnumerable<Spec>> ListByIdAsync(int id)

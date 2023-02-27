@@ -5,7 +5,7 @@ namespace MiBand.API.Domain.Repositories.Base
     public interface IBaseRespository<T>
     {
         Task AddAsync(T model);
-        Task<T> FindByStringAsync(string value);
+        Task<T> FindByIdAsync(int id);
         void Update(T model);
         void Delete(T model);
     }

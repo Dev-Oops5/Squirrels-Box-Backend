@@ -11,9 +11,15 @@ namespace MiBand.API.Services
         private readonly IStateRepository<Spec> _repository;
         private readonly IUnitOfWork _unitOfWork;
 
+        public SpecService(IStateRepository<Spec> repository, IUnitOfWork unitOfWork)
+        {
+            _repository = repository;
+            _unitOfWork = unitOfWork;
+        }
+
         public async Task<SpecResponse> DeleteAsync(int id)
         {
-            var result = await _repository.FindByStringAsync(id.ToString());
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new SpecResponse("User not found");
 
@@ -30,11 +36,11 @@ namespace MiBand.API.Services
             }
         }
 
-        public async Task<SpecResponse> FindByStringAsync(string value)
+        public async Task<SpecResponse> FindByIdAsync(int id)
         {
             try
             {
-                var result = await _repository.FindByStringAsync(value);
+                var result = await _repository.FindByIdAsync(id);
                 await _unitOfWork.CompleteAsync();
 
                 return new SpecResponse(result);
@@ -52,12 +58,13 @@ namespace MiBand.API.Services
 
         public async Task<SpecResponse> SaveAsync(Spec model)
         {
-            var existingVal = await _repository.FindByStringAsync(model.Id.ToString());
+            var existingVal = await _repository.FindByIdAsync(model.Id);
             if (existingVal != null)
                 return new SpecResponse("There is already a user with this Id");
 
             try
             {
+                model.CreatedDate = DateTime.Now.ToString();
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
 
@@ -71,7 +78,7 @@ namespace MiBand.API.Services
 
         public async Task<SpecResponse> UpdateAsync(int id, Spec model)
         {
-            var result = await _repository.FindByStringAsync(id.ToString());
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new SpecResponse("User not found");
 
@@ -82,6 +89,9 @@ namespace MiBand.API.Services
             result.Favourite = model.Favourite;
             result.Color = model.Color;
             result.Name = model.Name;
+
+            result.Active = model.Active;
+            result.UpdatedDate = DateTime.Now.ToString();
             try
             {
                 _repository.Update(result);

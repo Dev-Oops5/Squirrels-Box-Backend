@@ -10,7 +10,8 @@ namespace MiBand.API.Domain.Models
 
         public int UserId { get; set; }
 
-        public int SessionId { get; set; }
-        public List<Section> Sections { get; set; }
+        public User User { get; set; }
+        public ICollection<Section> Sections { get; set; }
+        public ICollection<Shared> Shareds { get; set; }
     }   
 }

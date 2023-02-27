@@ -6,12 +6,12 @@ using MiBand.API.Domain.Services.Communications;
 
 namespace MiBand.API.Services
 {
-    public class SecctionService : IStateService<Section, SectionResponse>
+    public class SectionService : IStateService<Section, SectionResponse>
     {
         private readonly IStateRepository<Section> _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public SecctionService(IStateRepository<Section> repository, IUnitOfWork unitOfWork)
+        public SectionService(IStateRepository<Section> repository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
@@ -19,7 +19,7 @@ namespace MiBand.API.Services
 
         public async Task<SectionResponse> DeleteAsync(int id)
         {
-            var result = await _repository.FindByStringAsync(id.ToString());
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new SectionResponse("User not found");
 
@@ -36,11 +36,11 @@ namespace MiBand.API.Services
             }
         }
 
-        public async Task<SectionResponse> FindByStringAsync(string value)
+        public async Task<SectionResponse> FindByIdAsync(int id)
         {
             try
             {
-                var result = await _repository.FindByStringAsync(value);
+                var result = await _repository.FindByIdAsync(id);
                 await _unitOfWork.CompleteAsync();
 
                 return new SectionResponse(result);
@@ -58,12 +58,13 @@ namespace MiBand.API.Services
 
         public async Task<SectionResponse> SaveAsync(Section model)
         {
-            var existingVal = await _repository.FindByStringAsync(model.Id.ToString());
+            var existingVal = await _repository.FindByIdAsync(model.Id);
             if (existingVal != null)
                 return new SectionResponse("There is already a user with this Id");
 
             try
             {
+                model.CreatedDate = DateTime.Now.ToString();
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
 
@@ -77,13 +78,16 @@ namespace MiBand.API.Services
 
         public async Task<SectionResponse> UpdateAsync(int id, Section model)
         {
-            var result = await _repository.FindByStringAsync(id.ToString());
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new SectionResponse("User not found");
 
             result.Favourite = model.Favourite;
             result.Color = model.Color;
             result.Name = model.Name;
+
+            result.Active = model.Active;
+            result.UpdatedDate = DateTime.Now.ToString();
             try
             {
                 _repository.Update(result);
